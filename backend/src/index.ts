@@ -19,7 +19,7 @@ const connection = async () => {
 			port: 5432,
 			username: 'postgres',
 			password: 'qwert',
-			database: 'postgres',
+			database: 'note',
 			entities:[Note, Category, Priority],
 			synchronize: true,
 			

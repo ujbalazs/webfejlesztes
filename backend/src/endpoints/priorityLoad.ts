@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/api/priorities', async (req, res) => {
 
 
-	const priorities = createQueryBuilder(Priority, "priorities")
+	const priorities = await createQueryBuilder(Priority, "priorities")
     .getMany();
 
 	return res.json(priorities);
