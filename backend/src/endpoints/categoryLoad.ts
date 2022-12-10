@@ -8,7 +8,9 @@ const router = express.Router();
 router.get('/api/categories', async (req, res) => {
 
 
-	const categories = await createQueryBuilder(Category, "categories").getMany();
+	const categories = await createQueryBuilder(Category, "categories")
+	.where("categories.id IN (:...ids)", { ids: [1, 2] }).getMany();
+	
 	console.log(categories)
 
 	return res.json(categories);

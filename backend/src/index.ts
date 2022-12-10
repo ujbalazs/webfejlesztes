@@ -7,6 +7,7 @@ import { createPriorityRouter } from './endpoints/prioritySave';
 import { deletePriorityRouter } from './endpoints/priorityDelete';
 import { loadCategoryRouter } from './endpoints/categoryLoad';
 import { loadPriorityRouter } from './endpoints/priorityLoad';
+import { createNodeRouter } from './endpoints/noteSave';
 
 
 const app = express();
@@ -36,7 +37,7 @@ const connection = async () => {
 		app.use(createPriorityRouter);
 		app.use(loadPriorityRouter);
 		app.use(deletePriorityRouter);
-		
+		app.use(createNodeRouter);
 
 		app.listen(8080, () => {
 			console.log('Now running on port 8080!');

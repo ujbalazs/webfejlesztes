@@ -11,6 +11,25 @@ import {
     BaseEntity,
 } from 'typeorm';
 
+@Entity('priority')
+export class Priority extends BaseEntity {
+
+    @PrimaryGeneratedColumn()
+    id: number
+
+	@Column()
+	name: string;
+
+    @OneToMany(() => Note, (note) => note.priority)
+    notes: Note[]
+
+    @CreateDateColumn()
+	created_at: Date;
+
+	@UpdateDateColumn()
+	updated_at: Date;
+}
+
 @Entity('note')
 export class Note extends BaseEntity {
 
@@ -20,10 +39,11 @@ export class Note extends BaseEntity {
 	@Column()
 	text: string;
 
-    @OneToMany(() => Priority, (priority) => priority.note)
-    priorities: Priority[]
+	@ManyToOne(() => Priority, (priority) => priority.notes , {cascade: true})
+    priority: Priority
 
-    @ManyToMany(() => Category)
+
+    @ManyToMany(() => Category, {cascade: true})
     @JoinTable()
     categories: Category[]
 
@@ -42,25 +62,6 @@ export class Category extends BaseEntity {
 
 	@Column()
 	name: string;
-
-    @CreateDateColumn()
-	created_at: Date;
-
-	@UpdateDateColumn()
-	updated_at: Date;
-}
-
-@Entity('priority')
-export class Priority extends BaseEntity {
-
-    @PrimaryGeneratedColumn()
-    id: number
-
-	@Column()
-	name: string;
-
-    @ManyToOne(() => Note, (note) => note.priorities)
-    note: Note
 
     @CreateDateColumn()
 	created_at: Date;
