@@ -1,5 +1,5 @@
 import express from 'express';
-import { Category } from '../models';
+import { Category } from '../../models';
 
 
 const router = express.Router();
@@ -8,7 +8,7 @@ router.delete('/api/category/delete/:categoryId',async (req, res) => {
 		const { categoryId } = req.params;
 
 		const response = await Category.delete(
-			categoryId
+			parseInt(categoryId)
 		);
 
 		return res.json(response);

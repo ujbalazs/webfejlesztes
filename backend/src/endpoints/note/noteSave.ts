@@ -1,6 +1,6 @@
 import express from 'express';
 import { createQueryBuilder } from 'typeorm';
-import { Category, Note, Priority } from '../models';
+import { Category, Note, Priority } from '../../models';
 
 
 const router = express.Router();
@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/api/note/save', async (req, res) => {
 	const {
-		text,
+		    text,
         priority,
         categories
 	} = req.body;
@@ -23,11 +23,11 @@ router.post('/api/note/save', async (req, res) => {
         categories:categories
     });
 
-    await note.save();
+    await note.save()
 
     return res.json(note);
 
 	
 });
 
-export { router as createNodeRouter };
+export { router as createNoteRouter };

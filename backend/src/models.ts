@@ -39,7 +39,11 @@ export class Note extends BaseEntity {
 	@Column()
 	text: string;
 
-	@ManyToOne(() => Priority, (priority) => priority.notes , {cascade: true})
+	@ManyToOne(() => Priority, (priority) => priority.notes , {
+		cascade: true,
+		onDelete: 'CASCADE',
+		onUpdate:'CASCADE'
+	  })
     priority: Priority
 
 

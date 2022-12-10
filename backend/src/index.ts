@@ -1,13 +1,16 @@
 import { createConnection } from 'typeorm';
 import express from 'express';
 import { Category, Note, Priority } from './models';
-import { createCategoryRouter } from './endpoints/categorySave';
-import { deleteCategoryRouter } from './endpoints/categoryDelete';
-import { createPriorityRouter } from './endpoints/prioritySave';
-import { deletePriorityRouter } from './endpoints/priorityDelete';
-import { loadCategoryRouter } from './endpoints/categoryLoad';
-import { loadPriorityRouter } from './endpoints/priorityLoad';
-import { createNodeRouter } from './endpoints/noteSave';
+import { createCategoryRouter } from './endpoints/category/categorySave';
+import { deleteCategoryRouter } from './endpoints/category/categoryDelete';
+import { createPriorityRouter } from './endpoints/priority/prioritySave';
+import { deletePriorityRouter } from './endpoints/priority/priorityDelete';
+import { loadCategoryRouter } from './endpoints/category/categoryLoad';
+import { loadPriorityRouter } from './endpoints/priority/priorityLoad';
+import { createNoteRouter } from './endpoints/note/noteSave';
+import { updateNoteRouter } from './endpoints/note/noteUpdate';
+import { loadNoteRouter } from './endpoints/note/noteLoad';
+import { deleteNoteRouter } from './endpoints/note/noteDelete';
 
 
 const app = express();
@@ -37,7 +40,11 @@ const connection = async () => {
 		app.use(createPriorityRouter);
 		app.use(loadPriorityRouter);
 		app.use(deletePriorityRouter);
-		app.use(createNodeRouter);
+
+		app.use(createNoteRouter);
+		app.use(updateNoteRouter);
+		app.use(loadNoteRouter);
+		app.use(deleteNoteRouter);
 
 		app.listen(8080, () => {
 			console.log('Now running on port 8080!');

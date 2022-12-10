@@ -1,5 +1,5 @@
 import express from 'express';
-import {  Priority } from '../models';
+import {  Priority } from '../../models';
 
 
 const router = express.Router();
