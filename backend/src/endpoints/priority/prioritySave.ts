@@ -15,7 +15,7 @@ router.post('/api/priority/save', async (req, res) => {
 
     await priority.save();
 
-    return res.json(priority);
+    return res.sendStatus(200);
 
 	
 });

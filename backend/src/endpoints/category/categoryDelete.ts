@@ -8,10 +8,10 @@ router.delete('/api/category/delete/:categoryId',async (req, res) => {
 		const { categoryId } = req.params;
 
 		const response = await Category.delete(
-			parseInt(categoryId)
+			categoryId
 		);
 
-		return res.json(response);
+		return res.sendStatus(200);
 	}
 );
 

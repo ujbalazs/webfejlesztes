@@ -8,10 +8,10 @@ router.delete('/api/note/delete/:noteId',async (req, res) => {
 		const { noteId } = req.params;
 
 		const response = await Note.delete(
-			parseInt(noteId)
+			noteId
 		);
 
-		return res.json(response);
+		return res.sendStatus(200);
 	}
 );
 

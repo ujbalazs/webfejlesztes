@@ -27,7 +27,7 @@ router.post('/api/note/update/:noteId', async (req, res) => {
 //ManytoMany miatt a sima update nem működik, ezzel csinálja jól.
 await note.save();
 
-return res.json(note);
+return res.sendStatus(200);
 
 	
 });

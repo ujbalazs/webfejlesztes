@@ -11,7 +11,7 @@ router.delete('/api/priority/delete/:priorityId',async (req, res) => {
 			priorityId
 		);
 
-		return res.json(response);
+		return res.sendStatus(200);
 	}
 );
 

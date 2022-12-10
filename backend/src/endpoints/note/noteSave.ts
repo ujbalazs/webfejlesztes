@@ -25,7 +25,7 @@ router.post('/api/note/save', async (req, res) => {
 
     await note.save()
 
-    return res.json(note);
+    return res.sendStatus(200);
 
 	
 });

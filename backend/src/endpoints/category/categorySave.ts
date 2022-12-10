@@ -15,7 +15,7 @@ router.post('/api/category/save', async (req, res) => {
 
     await category.save();
 
-    return res.json(category);
+    return res.sendStatus(200);
 
 	
 });
