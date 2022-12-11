@@ -11,6 +11,9 @@ import { CatAndPrioComponent } from './cat-and-prio/cat-and-prio.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatSelectModule} 
     from '@angular/material'; 
+import { CategoryService } from './services/category.service';
+import { HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -27,10 +30,11 @@ import { MatSelectModule}
     MatInputModule,
     MatSelectModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
  
   ],
-  providers: [],
+  providers: [CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

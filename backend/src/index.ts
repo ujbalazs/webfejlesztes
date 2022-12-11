@@ -14,6 +14,7 @@ import { deleteNoteRouter } from './endpoints/note/noteDelete';
 
 
 const app = express();
+var cors = require('cors');
 
 const connection = async () => {
 	try {
@@ -30,6 +31,7 @@ const connection = async () => {
 		});
 		console.log('Connected to Database');
 
+		app.use(cors());
 
 		app.use((req, res, next) => {	
 			if(!req.get('Authorization')){
