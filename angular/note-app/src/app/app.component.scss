@@ -1,0 +1,35 @@
+.header{
+    height: 200px;
+    width: 100%;
+    background-color: burlywood;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+    font-family: "Lucida Handwriting";
+}
+
+.footer{
+    height: 100px;
+    width: 100%;
+    background-color: rgb(182, 157, 124);
+    border: 2px solid black;
+    border-radius: 5px;
+}
+h4{
+    font-family: "Lucida Handwriting";
+    text-align: center;
+}
+.menubar{
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+}
+button{
+    width: 195px;
+    height: 45px;
+    font-size: 15px;
+    font-weight: bold;
+}
