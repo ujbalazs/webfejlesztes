@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatAndPrioComponent implements OnInit {
 
+   catEditorShow:boolean = false;
+   prioEditorShow:boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  newCat(){
+    if(this.catEditorShow == false){
+      this.catEditorShow = true
+    }else{this.catEditorShow = false}
+  }
+
+  newPrio(){
+    if(this.prioEditorShow == false){
+      this.prioEditorShow = true
+    }else{this.prioEditorShow = false}
   }
 
 }

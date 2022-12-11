@@ -1,0 +1,60 @@
+.page{
+    display: flex;
+    flex-direction: row;
+    min-height: 630px;
+    height: 100%;
+    background-color: antiquewhite;
+}
+.cat{
+    width: 50%;
+    height: 100%;
+}
+.prio{
+    width: 50%;
+    height: 100%;
+}
+
+button {
+    background-color: #a78242da;
+    font-weight: bold;
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  mat-divider{
+    margin: 10px;
+    
+  }
+
+  .cancel{
+    background-color: brown;
+}
+
+.save{
+    background-color: forestgreen
+}
+.editor{
+    width: 350px;
+    margin-left: 100px;
+}
+
+.container{
+    margin-left: 100px;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+.item{
+    width: 250px;
+}
+
+h2{
+    font-family: "Lucida Handwriting";
+    text-align: center;
+}
+
+mat-card{
+    background-color:rgb(253, 250, 240)
+}

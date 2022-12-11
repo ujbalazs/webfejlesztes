@@ -1,0 +1,68 @@
+button {
+    background-color: #a78242da;
+    font-weight: bold;
+    margin-left: 350px;
+    margin-top: 50px;
+  }
+
+.page{
+    min-height: 630px;
+    height: 100%;
+    background-color: antiquewhite;
+    padding-bottom: 20px;
+}
+.editor{
+    margin-left: 350px;
+    margin-top: 20px;
+    width: 410px;
+    height: 300px;
+}
+.selects{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+textarea{
+    background-color: rgb(240, 240, 240);
+    height: 130px;
+    width: 420px;
+}
+.cancel{
+    background-color: brown;
+}
+
+.save{
+    background-color: forestgreen
+}
+mat-divider{
+    margin: 20px;
+}
+
+.card{
+    width: 350px;
+    height: 250px;
+}
+.container{
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.mid{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editbutton{
+    background-color: royalblue;
+}
+
+h2{
+    font-family: "Lucida Handwriting";
+    text-align: center;
+    margin: 0;
+    padding-top: 20px;
+}
+mat-card{
+    background-color:rgb(253, 250, 240)
+}
