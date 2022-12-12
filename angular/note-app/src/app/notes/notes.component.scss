@@ -70,3 +70,11 @@ mat-card-subtitle{
     color: black;
     font-weight: bolder;
 }
+.catcontainer{
+    display: flex;
+    flex-direction: row;
+}
+.cat{
+    margin-top: 0px !important;
+    margin-right: 5px;
+}

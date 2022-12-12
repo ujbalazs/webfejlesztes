@@ -14,6 +14,8 @@ import { CategoryService } from './services/category.service';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PriorityService } from './services/priority.service';
+import { NoteService } from './services/note.service';
 
 
 @NgModule({
@@ -34,10 +36,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
- 
+    BrowserAnimationsModule,
+
   ],
-  providers: [CategoryService],
+  providers: [CategoryService, PriorityService, NoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

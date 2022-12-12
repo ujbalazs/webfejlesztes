@@ -9,6 +9,8 @@ router.get('/api/notes', async (req, res) => {
 
 
 	const notes = await createQueryBuilder(Note, "notes").
+	leftJoinAndSelect("notes.categories", "categories").
+	leftJoinAndSelect("notes.priority", "priority").
 	getMany();
 	
 	console.log(notes)
