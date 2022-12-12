@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../services/Category';
 import { CategoryService } from '../services/category.service';
+import { Priority } from '../services/Priority';
 import { PriorityService } from '../services/priority.service';
-
-
-
 
 
 @Component({
@@ -16,19 +15,24 @@ export class CatAndPrioComponent implements OnInit {
 
    catEditorShow:boolean = false;
    prioEditorShow:boolean = false;
-   categories:any[] | undefined
-   priorities:any[] | undefined
-   
+   categories?:Category[]
+   priorities?:Priority[]
+   catName!: string;
+   prioName!: string;
+   catValid: boolean = false;
+   prioValid: boolean = false;
 
+  
   constructor(private catService: CategoryService, private prioService: PriorityService) { }
 
+  
   ngOnInit(): void {
-    this.loadcats();
-    this.loadprios();
+    this.loadCats();
+    this.loadPrios();
   }
 
 
-  loadcats(){
+  loadCats(){
     this.catService.loadCategory().then(
       data => {
         this.categories = data;
@@ -37,11 +41,47 @@ export class CatAndPrioComponent implements OnInit {
     );
   }
 
-  loadprios(){
+  loadPrios(){
     this.prioService.loadPriority().then(data =>{
        this.priorities = data;
     });
    
+  }
+
+  deleteCat(id:string){
+    this.catService.deleteCategory(id).then(() =>{
+      this.loadCats();
+    })
+  }
+
+  deletePrio(id:string){
+    this.prioService.deletePriority(id).then(() =>{
+      this.loadPrios();
+    })
+  }
+
+  saveCat(){
+    if(this.catName == '' || this.catName == null ){
+      this.catValid = true
+    }else{
+      this.catValid = false
+      this.catService.saveCategory(this.catName).then(() =>{
+      this.loadCats();
+      this.catName = '';
+      this.catEditorShow = false;
+    })}
+  }
+
+  savePrio(){
+    if(this.prioName == '' || this.prioName == null ){
+      this.prioValid = true
+    }else{
+      this.prioValid = false
+      this.prioService.savePriority(this.prioName).then(() =>{
+      this.loadPrios();
+      this.prioName = '';
+      this.prioEditorShow = false;
+    })}
   }
   
   newCat(){

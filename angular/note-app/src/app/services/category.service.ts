@@ -1,22 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
+import { Category } from './Category';
 
-interface Category {
-  id: number,
-  name: string
+const loadUrl = "http://localhost:8080/api/categories";
+const deleteUrl = "http://localhost:8080/api/category/delete/";
+const saveUrl = "http://localhost:8080/api/category/save";
 
-}
-
-const url = "http://localhost:8080/api/categories";
-
-const loadOptions = {
-
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'Basic ' + btoa('admin:admin')
-  }),
-  params: new HttpParams().set('','')
-};
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +17,37 @@ export class CategoryService {
 
 
   loadCategory(){
-     return this.httpClien.get<Category[]>(url, loadOptions).toPromise();
+     return this.httpClien.get<Category[]>(loadUrl, 
+      {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'Basic ' + btoa('admin:admin')
+        }),      
+      }).toPromise();
+  }
+
+  deleteCategory(id:string){
+    return this.httpClien.delete(deleteUrl + id, {
+      observe: 'response',
+      responseType: 'blob',
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa('admin:admin')
+      }),
+    }).toPromise();
+  }
+
+  saveCategory(name:string){
+    return this.httpClien.post(saveUrl, {
+      "name": name
+    } ,{
+      observe: 'response',
+      responseType: 'blob',
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa('admin:admin')
+      }),
+    }).toPromise();
   }
 
 

@@ -9,10 +9,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { NotesComponent } from './notes/notes.component';
 import { CatAndPrioComponent } from './cat-and-prio/cat-and-prio.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
-import { MatSelectModule} 
-    from '@angular/material'; 
+import { MatSelectModule} from '@angular/material'; 
 import { CategoryService } from './services/category.service';
 import { HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -32,6 +33,8 @@ import { HttpClientModule} from '@angular/common/http';
     MatDividerModule,
     MatIconModule,
     HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule
  
   ],
   providers: [CategoryService],

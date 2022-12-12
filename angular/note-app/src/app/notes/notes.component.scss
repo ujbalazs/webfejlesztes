@@ -23,7 +23,7 @@ button {
     gap: 10px;
 }
 textarea{
-    background-color: rgb(240, 240, 240);
+    background-color: rgba(0,0,0,.04);
     height: 130px;
     width: 420px;
 }
@@ -65,4 +65,8 @@ h2{
 }
 mat-card{
     background-color:rgb(253, 250, 240)
+}
+mat-card-subtitle{
+    color: black;
+    font-weight: bolder;
 }
