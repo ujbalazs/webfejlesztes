@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
 import { Priority } from './Priority';
 
-
 const loadUrl = "http://localhost:8080/api/priorities";
 const deleteUrl = "http://localhost:8080/api/priority/delete/";
 const saveUrl = "http://localhost:8080/api/priority/save";
-
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +45,5 @@ savePriority(name:string){
     }),
   }).toPromise();
 }
-
 
 }

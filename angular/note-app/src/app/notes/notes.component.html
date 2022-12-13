@@ -11,8 +11,8 @@
          <div class="selects">
         <mat-form-field appearance="fill">
             <mat-label>Kategóriák</mat-label>
-            <mat-select [(ngModel)]="selectedCats" [multiple]="true">
-              <mat-option *ngFor="let i of categories" [value]="i">
+            <mat-select [(ngModel)]="selectedCatsIds" [multiple]="true">
+              <mat-option *ngFor="let i of categories" [value]="i.id">
                 {{i.name}}
               </mat-option>
             </mat-select>
@@ -20,8 +20,8 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Prioritás</mat-label>
-          <mat-select [(ngModel)]="selectedPrio">
-            <mat-option *ngFor="let i of priorities" [value]="i">
+          <mat-select [(ngModel)]="selectedPrioId">
+            <mat-option *ngFor="let i of priorities" [value]="i.id">
               {{i.name}}
             </mat-option>
           </mat-select>
@@ -29,7 +29,8 @@
         </div>
             <textarea [(ngModel)]="text" matInput placeholder="Ide írd a szöveget..."></textarea>
         <mat-card-actions>
-          <button mat-button (click)="saveNotes()" class="save">Mentés</button>
+          <button mat-button *ngIf="this.editing == false" (click)="saveNote()" class="save">Felvitel</button>
+          <button mat-button *ngIf="this.editing == true" (click)="updateNote(this.updateId)" class="save">Módosítás</button>
           <button mat-button (click)="cancelEdit()" class="cancel">Mégse</button>
         </mat-card-actions>
       </mat-card>
@@ -49,8 +50,8 @@
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button class="editbutton">Szerkesztés</button>
-            <button mat-button  class="cancel">Törlés</button>
+            <button mat-button (click)="setItemToUpdate(i.id.toString(), i.text, i.categories, i.priority.id)" class="editbutton">Szerkesztés</button>
+            <button mat-button (click)="deleteNote(i.id.toString())"  class="cancel">Törlés</button>
           </mat-card-actions>
       </mat-card>
     </div>

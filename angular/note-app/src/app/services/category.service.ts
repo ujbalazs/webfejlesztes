@@ -6,7 +6,6 @@ const loadUrl = "http://localhost:8080/api/categories";
 const deleteUrl = "http://localhost:8080/api/category/delete/";
 const saveUrl = "http://localhost:8080/api/category/save";
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +13,6 @@ const saveUrl = "http://localhost:8080/api/category/save";
 export class CategoryService {
 
   constructor(private httpClien: HttpClient) { }
-
 
   loadCategory(){
      return this.httpClien.get<Category[]>(loadUrl, 
@@ -49,7 +47,5 @@ export class CategoryService {
       }),
     }).toPromise();
   }
-
-
 
 }

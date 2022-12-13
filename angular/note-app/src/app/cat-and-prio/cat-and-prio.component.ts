@@ -15,10 +15,10 @@ export class CatAndPrioComponent implements OnInit {
 
    catEditorShow:boolean = false;
    prioEditorShow:boolean = false;
-   categories?:Category[]
-   priorities?:Priority[]
-   catName!: string;
-   prioName!: string;
+   categories:Category[]
+   priorities:Priority[]
+   catName: string;
+   prioName: string;
    catValid: boolean = false;
    prioValid: boolean = false;
 
@@ -30,7 +30,6 @@ export class CatAndPrioComponent implements OnInit {
     this.loadCats();
     this.loadPrios();
   }
-
 
   loadCats(){
     this.catService.loadCategory().then(
