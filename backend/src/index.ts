@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
 import express from 'express';
-import { Category, Note, Priority } from './models';
+import { Category, Note, Priority, User } from './models';
 import { createCategoryRouter } from './endpoints/category/categorySave';
 import { deleteCategoryRouter } from './endpoints/category/categoryDelete';
 import { createPriorityRouter } from './endpoints/priority/prioritySave';
@@ -11,6 +11,8 @@ import { createNoteRouter } from './endpoints/note/noteSave';
 import { updateNoteRouter } from './endpoints/note/noteUpdate';
 import { loadNoteRouter } from './endpoints/note/noteLoad';
 import { deleteNoteRouter } from './endpoints/note/noteDelete';
+import { createUserRouter } from './endpoints/user/userRegister';
+import { loginUserRouter } from './endpoints/user/userLogin';
 
 
 const app = express();
@@ -25,7 +27,7 @@ const connection = async () => {
 			username: 'postgres',
 			password: 'qwert',
 			database: 'note',
-			entities:[Note, Category, Priority],
+			entities:[Note, Category, Priority, User],
 			synchronize: true,
 			
 		});
@@ -66,6 +68,9 @@ const connection = async () => {
 		app.use(updateNoteRouter);
 		app.use(loadNoteRouter);
 		app.use(deleteNoteRouter);
+
+		app.use(createUserRouter);
+		app.use(loginUserRouter);
 
 		app.listen(8080, () => {
 			console.log('Now running on port 8080!');

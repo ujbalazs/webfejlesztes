@@ -73,3 +73,23 @@ export class Category extends BaseEntity {
 	@UpdateDateColumn()
 	updated_at: Date;
 }
+
+@Entity('user')
+export class User extends BaseEntity {
+
+    @PrimaryGeneratedColumn()
+    id: number
+
+	@Column()
+	name: string;
+
+	@Column()
+	password: string;
+
+    @CreateDateColumn()
+	created_at: Date;
+
+	@UpdateDateColumn()
+	updated_at: Date;
+}
+
