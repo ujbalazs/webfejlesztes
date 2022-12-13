@@ -25,6 +25,7 @@ export class NotesComponent implements OnInit {
   text:string
   showEditor: boolean = false;
   editing: boolean = false;
+  valid: boolean = false;
 
   toppings = new FormControl('');
   constructor(private catService: CategoryService, private prioService: PriorityService, private noteService:NoteService) { }
@@ -52,6 +53,7 @@ export class NotesComponent implements OnInit {
   }
 
   deleteSelection(){
+    this.valid = false;
     this.selectedCats = [];
     this.selectedCatsIds = [];
     this.selectedPrio = null;
@@ -84,10 +86,13 @@ export class NotesComponent implements OnInit {
 
   saveNote(){
     this.selectCatAndPrio();
+    if(this.text == null || this.text == "" || this.selectedCats.length == 0 || this.selectedPrio == null){
+      this.valid = true;
+    }else{
     this.noteService.saveNote(this.text, this.selectedCats, this.selectedPrio).then(()=>{
       this.loadNotes();
       this.deleteSelection()  
-    })
+    })}
   }
 
   deleteNote(id:string){
@@ -112,10 +117,13 @@ export class NotesComponent implements OnInit {
 
   updateNote(id){
     this.selectCatAndPrio();
+    if(this.text == null || this.text == "" || this.selectedCats.length == 0 || this.selectedPrio == null){
+      this.valid = true;
+    }else{
     this.noteService.updateNote(id, this.text, this.selectedCats, this. selectedPrio).then(()=>{
       this.loadNotes();
       this.deleteSelection()   
-    })
+    })}
   }
 
   newNote(){

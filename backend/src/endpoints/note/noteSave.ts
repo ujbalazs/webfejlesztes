@@ -14,8 +14,9 @@ router.post('/api/note/save', async (req, res) => {
         categories
 	} = req.body;
     
-   
-  console.log(req.body)
+   if( text == null || text == "" || priority == null || categories == null || categories.length == 0){
+    return res.sendStatus(400);
+   }else{
 
 	const note = Note.create({
         text: text,
@@ -27,7 +28,7 @@ router.post('/api/note/save', async (req, res) => {
 
     return res.sendStatus(200);
 
-	
+   }
 });
 
 export { router as createNoteRouter };

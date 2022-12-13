@@ -11,8 +11,7 @@ router.get('/api/categories', async (req, res) => {
 	const categories = await createQueryBuilder(Category, "categories")
 	.getMany();
 	
-	console.log(categories)
-
+	
 	return res.json(categories);
 });
 

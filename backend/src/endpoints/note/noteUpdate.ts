@@ -14,8 +14,9 @@ router.post('/api/note/update/:noteId', async (req, res) => {
 	} = req.body;
     const { noteId } = req.params;
     
-   
-  console.log(req.body)
+    if( text == null || text == "" || priority == null || categories == null){
+      return res.sendStatus(400);
+     }else{
 
 	const note = Note.create({
     id: parseInt(noteId),
@@ -29,7 +30,7 @@ await note.save();
 
 return res.sendStatus(200);
 
-	
+}
 });
 
 export { router as updateNoteRouter };

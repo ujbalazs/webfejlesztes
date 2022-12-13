@@ -9,6 +9,9 @@ router.post('/api/category/save', async (req, res) => {
 		name
 	} = req.body;
 
+    if(name == null || name == ""){
+        return res.sendStatus(400);
+    }else{
 	const category = Category.create({
         name: name
     });
@@ -17,7 +20,7 @@ router.post('/api/category/save', async (req, res) => {
 
     return res.sendStatus(200);
 
-	
+}
 });
 
 export { router as createCategoryRouter };

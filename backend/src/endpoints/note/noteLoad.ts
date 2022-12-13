@@ -13,8 +13,6 @@ router.get('/api/notes', async (req, res) => {
 	leftJoinAndSelect("notes.priority", "priority").
 	getMany();
 	
-	console.log(notes)
-
 	return res.json(notes);
 });
 

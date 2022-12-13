@@ -9,6 +9,10 @@ router.post('/api/priority/save', async (req, res) => {
 		name
 	} = req.body;
 
+    if(name == null || name == ""){
+        return res.sendStatus(400);
+    }
+    else{
 	const priority = Priority.create({
         name: name
     });
@@ -16,8 +20,7 @@ router.post('/api/priority/save', async (req, res) => {
     await priority.save();
 
     return res.sendStatus(200);
-
-	
+}
 });
 
 export { router as createPriorityRouter };
