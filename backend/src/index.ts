@@ -35,25 +35,6 @@ const connection = async () => {
 
 		app.use(cors());
 
-		app.use((req, res, next) => {	
-			if(!req.get('Authorization')){
-				const err = new Error('Not Authenticated!')	;
-				res.status(401);
-				next(err);
-			}else{
-				const auth = Buffer.from(req.get('Authorization')!.split(' ')[1], 'base64').toString().split(':');
-				const username = auth[0]
-				const password = auth[1]
-				if(!(username === 'admin' && password === 'admin')){
-					const err = new Error('Not Authenticated!')
-					res.status(401);
-					next(err)
-				} 
-				res.status(200)	
-				next()
-			}
-		});
-		
 		app.use(express.json());
 		
 		app.use(createCategoryRouter);
