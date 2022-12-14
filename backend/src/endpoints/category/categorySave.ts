@@ -22,7 +22,8 @@ router.post('/api/category/save', async (req, res) => {
                     return res.sendStatus(400);
                 }else{
                 const category = Category.create({
-                    name: name
+                    name: name,
+					user_id: verified.user.id
                 });
             
                 await category.save();

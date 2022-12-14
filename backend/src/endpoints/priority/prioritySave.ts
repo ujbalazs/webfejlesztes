@@ -21,7 +21,8 @@ router.post('/api/priority/save', async (req, res) => {
     }
     else{
 	const priority = Priority.create({
-        name: name
+        name: name,
+        user_id: verified.user.id
     });
 
     await priority.save();

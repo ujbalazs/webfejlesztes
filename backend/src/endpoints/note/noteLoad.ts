@@ -16,6 +16,7 @@ router.get('/api/notes', async (req, res) => {
 		}else{
 
 	const notes = await createQueryBuilder(Note, "notes").
+	where("notes.user_id = :userid", { userid: verified.user.id }).
 	leftJoinAndSelect("notes.categories", "categories").
 	leftJoinAndSelect("notes.priority", "priority").
 	getMany();

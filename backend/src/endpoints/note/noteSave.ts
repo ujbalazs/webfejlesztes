@@ -27,6 +27,7 @@ router.post('/api/note/save', async (req, res) => {
 
 	const note = Note.create({
         text: text,
+        user_id: verified.user.id,
         priority: priority,
         categories:categories
     });

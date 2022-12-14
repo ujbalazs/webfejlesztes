@@ -23,6 +23,9 @@ export class Priority extends BaseEntity {
     @OneToMany(() => Note, (note) => note.priority)
     notes: Note[]
 
+	@Column()
+	user_id: string;
+
     @CreateDateColumn()
 	created_at: Date;
 
@@ -51,6 +54,9 @@ export class Note extends BaseEntity {
     @JoinTable()
     categories: Category[]
 
+	@Column()
+	user_id: string;
+
     @CreateDateColumn()
 	created_at: Date;
 
@@ -66,6 +72,9 @@ export class Category extends BaseEntity {
 
 	@Column()
 	name: string;
+
+	@Column()
+	user_id: string;
 
     @CreateDateColumn()
 	created_at: Date;

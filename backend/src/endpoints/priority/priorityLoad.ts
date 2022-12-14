@@ -15,6 +15,7 @@ router.get('/api/priorities', async (req, res) => {
 		}else{
 
 	const priorities = await createQueryBuilder(Priority, "priorities")
+	.where("priorities.user_id = :userid", { userid: verified.user.id })
     .getMany();
 
 	return res.json(priorities);
