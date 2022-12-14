@@ -21,8 +21,6 @@ router.get('/api/priorities', async (req, res) => {
 	return res.json(priorities);
 		}
 	  })
-	
-	
 });
 
 export { router as loadPriorityRouter };

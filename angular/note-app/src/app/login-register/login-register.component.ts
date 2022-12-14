@@ -17,6 +17,7 @@ export class LoginRegisterComponent implements OnInit {
   loginError:boolean;
   registerError:boolean;
   valid:boolean;
+  registered:boolean;
   
 
   constructor(private logRegService:LoginRegisterService, private authService: AuthService, private router: Router) { }
@@ -41,11 +42,13 @@ export class LoginRegisterComponent implements OnInit {
           let res:any = data.body;
           this.authService.saveToken(res.token);
           this.resetInput();
+          this.registered =false;
           this.router.navigateByUrl('');
         }
       ).catch(e =>{
         this.registerError = false;
         this.loginError = true;
+        this.registered =false;
         console.log(e)
       })
     }
@@ -57,9 +60,11 @@ export class LoginRegisterComponent implements OnInit {
      }else{
     this.logRegService.register(this.name, this.password).then(
       ()=>{
+        this.registered =true;
         this.resetInput();
       }
     ).catch(e =>{
+      this.registered =false;
       this.loginError = false;
       this.registerError = true;
       console.log(e)

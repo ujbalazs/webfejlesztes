@@ -6,13 +6,29 @@ import { Note } from '../services/Note';
 import { NoteService } from '../services/note.service';
 import { Priority } from '../services/Priority';
 import { PriorityService } from '../services/priority.service';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss']
+  styleUrls: ['./notes.component.scss'],
+  animations: [
+    trigger(
+      'animation', [
+        transition(':enter', [
+          style({ opacity: 0}),
+          animate('400ms', style({ opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({ opacity: 1}),
+          animate('400ms', style({ opacity: 0}))
+        ])
+      ]
+    )
+  ]
 })
 export class NotesComponent implements OnInit {
+
 
   categories:Category[]
   priorities:Priority[]
@@ -26,6 +42,7 @@ export class NotesComponent implements OnInit {
   showEditor: boolean = false;
   editing: boolean = false;
   valid: boolean = false;
+  showBar:boolean = false
 
   toppings = new FormControl('');
   constructor(private catService: CategoryService, private prioService: PriorityService, private noteService:NoteService) { }
@@ -36,7 +53,16 @@ export class NotesComponent implements OnInit {
     this.loadNotes();
   }
 
+  snackBar(){
+    this.showBar = true;
+    setTimeout(
+      () => {
+        this.showBar = false;
+      }, 2000);
+  }
+
   selectCatAndPrio(){
+    if(this.categories.length != 0 || this.categories != null){
     this.selectedCats = [];
     for(let i = 0; i < this.categories.length; i++){
       for(let j = 0; j < this.selectedCatsIds.length; j++){
@@ -44,12 +70,14 @@ export class NotesComponent implements OnInit {
           this.selectedCats.push(this.categories[i]);
         }
       }
-    }
+    }}
+    if(this.priorities.length != 0 || this.priorities != null){
+      this.selectedPrio = null;
     for(let i = 0; i < this.priorities.length; i++){
         if(this.priorities[i].id == this.selectedPrioId ){
           this.selectedPrio =this.priorities[i]
        } 
-    }
+    }}
   }
 
   deleteSelection(){
@@ -90,14 +118,23 @@ export class NotesComponent implements OnInit {
       this.valid = true;
     }else{
     this.noteService.saveNote(this.text, this.selectedCats, this.selectedPrio).then(()=>{
+      this.showEditor = false;
       this.loadNotes();
-      this.deleteSelection()  
+      this.deleteSelection();
+      setTimeout(
+        () => {
+          this.snackBar()
+        }, 200);  
     })}
   }
 
   deleteNote(id:string){
      this.noteService.deleteNote(id).then(()=>{
       this.loadNotes();
+      setTimeout(
+        () => {
+          this.snackBar()
+        }, 200);  
     })
   }
 
@@ -121,8 +158,13 @@ export class NotesComponent implements OnInit {
       this.valid = true;
     }else{
     this.noteService.updateNote(id, this.text, this.selectedCats, this. selectedPrio).then(()=>{
+      this.showEditor = false;
       this.loadNotes();
-      this.deleteSelection()   
+      this.deleteSelection();
+      setTimeout(
+        () => {
+          this.snackBar()
+        }, 200);    
     })}
   }
 

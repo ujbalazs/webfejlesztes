@@ -10,8 +10,6 @@ router.post('/api/category/save', async (req, res) => {
 		name
 	} = req.body;
 
-
-
 	var token = req.headers['x-access-token'];
 		jwt.verify(token, "token", async (err, verified) => {
 			if(err){

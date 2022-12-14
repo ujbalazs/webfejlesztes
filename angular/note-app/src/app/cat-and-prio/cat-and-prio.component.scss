@@ -65,3 +65,20 @@ mat-card{
     color: red;
     text-decoration: underline;
 }
+.snackbar{
+    width: 250px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 139, 69, 0.555);
+    border: 2px solid rgba(0, 196, 42, 0.555);
+    font-size:large;
+    font-weight: bold;
+    position: fixed;
+    margin-left: 25px;
+    bottom: 90%;
+    color: rgb(1, 54, 13);
+    
+    
+}

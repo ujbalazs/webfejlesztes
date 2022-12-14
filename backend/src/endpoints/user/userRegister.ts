@@ -12,7 +12,9 @@ router.post('/api/user/register', async (req, res) => {
         password
 	} = req.body;
 
-
+    if(name == "" || name == null || password == "" || password== null){
+        return res.sendStatus(400)
+      }else{
     const users = await createQueryBuilder(User, "users")
     .getMany();
 
@@ -21,9 +23,7 @@ router.post('/api/user/register', async (req, res) => {
            return res.status(400).send('This name is already taken')
         }
      }
-
     const hashPassword = await bcrypt.hash(password, 10)
-    
 	const priority = User.create({
         name: name,
         password: hashPassword
@@ -31,10 +31,8 @@ router.post('/api/user/register', async (req, res) => {
 
     await priority.save();
 
-    return res.sendStatus(200);
-
-    
-    
+    return res.sendStatus(200);    
+}  
 });
 
 export { router as createUserRouter };

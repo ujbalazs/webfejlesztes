@@ -26,10 +26,18 @@ button{
     background-color:rgb(253, 250, 240);
     font-weight: bold;
 }
-p{
+.valid{
     margin-top: 0;
     margin-bottom: 0;
     font-size: small;
     color: red;
     text-decoration: underline;
+}
+
+.registered{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: normal !important;
+    color: rgb(0, 80, 13);
+    text-decoration: none;
 }

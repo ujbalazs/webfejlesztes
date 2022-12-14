@@ -14,6 +14,9 @@ router.post('/api/user/login', async (req, res) => {
         password
 	} = req.body;
 
+  if(name == "" || name == null || password == "" || password== null){
+    return res.sendStatus(400)
+  }else{
     const user = await createQueryBuilder(User, "user")
     .where("user.name = :name", { name: name })
     .getOne();
@@ -32,10 +35,6 @@ router.post('/api/user/login', async (req, res) => {
       } else {
         return res.status(400).send('Login failed')
       }
-
-    
-
-   
-});
+}});
 
 export { router as loginUserRouter };

@@ -8,7 +8,6 @@ const router = express.Router();
 router.delete('/api/category/delete/:categoryId',async (req, res) => {
 		const { categoryId } = req.params;
 
-
 		var token = req.headers['x-access-token'];
 		jwt.verify(token, "token", async (err, verified) => {
 			if(err){
