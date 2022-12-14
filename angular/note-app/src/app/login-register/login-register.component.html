@@ -11,11 +11,14 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Jelszó</mat-label>
-            <input [(ngModel)]="password" matInput >
+            <input [(ngModel)]="password" type="password" matInput >
           </mat-form-field>
+          <p *ngIf="valid == false">Tölts ki minden mezőt!</p>
+          <p *ngIf="loginError == true">Hibás bejelentkezési adatok!</p>
+          <p *ngIf="registerError == true">Felhasználónév foglalt!</p>
 
           <button mat-raised-button color="Accent" (click)="login()" >Bejelentkezés</button>
-          <button mat-raised-button color="Accent" >Regisztráció</button>
+          <button mat-raised-button color="Accent" (click)="register()" >Regisztráció</button>
                 
     </mat-card>
 
