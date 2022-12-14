@@ -17,7 +17,6 @@ export class PriorityService {
     return this.httpClien.get<Priority[]>(loadUrl,{
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + btoa('admin:admin')
       }),
     } ).toPromise();
  }
@@ -28,7 +27,6 @@ export class PriorityService {
     responseType: 'blob',
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin')
     }),
   }).toPromise();
 }
@@ -41,7 +39,6 @@ savePriority(name:string){
     responseType: 'blob',
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin')
     }),
   }).toPromise();
 }

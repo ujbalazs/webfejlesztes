@@ -1,0 +1,28 @@
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 630px;
+    height: 100%;
+    background-color: antiquewhite;
+    padding-bottom: 20px;
+}
+
+mat-card{
+    width: 400px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color:rgb(255, 254, 249)
+}
+h2{
+    font-weight: lighter;
+}
+button{
+    background-color:rgb(253, 250, 240);
+    font-weight: bold;
+}

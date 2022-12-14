@@ -1,0 +1,23 @@
+<div class="page">
+
+    <mat-card>
+        
+        <h2>Jelentkezz be vagy regisztrálj!</h2>
+       
+        <mat-form-field appearance="outline">
+            <mat-label>Felhasználónév</mat-label>
+            <input [(ngModel)]="name" matInput >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Jelszó</mat-label>
+            <input [(ngModel)]="password" matInput >
+          </mat-form-field>
+
+          <button mat-raised-button color="Accent" (click)="login()" >Bejelentkezés</button>
+          <button mat-raised-button color="Accent" >Regisztráció</button>
+                
+    </mat-card>
+
+</div>
+

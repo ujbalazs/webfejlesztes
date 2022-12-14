@@ -1,8 +1,14 @@
 <div class="header">
-  <h1>Notesz</h1>
+  <div class="top">
+     <button class="logout" mat-mini-fab color="basic" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+    <h1>Notesz</h1>
+  </div>
+ 
   <div class = "menubar">
-    <button mat-raised-button color="Accent" [routerLink]="['']">Bejegyzések</button>
-    <button mat-raised-button color="Accent" [routerLink]="['cat_prio']">Kategóriák és Prioritások</button>
+    <button class="navbut" mat-raised-button color="Accent" (click)="notesButton()">Bejegyzések</button>
+    <button class="navbut" mat-raised-button color="Accent"  (click)="catPrioButton()">Kategóriák és Prioritások</button>
   </div>
 </div>
 

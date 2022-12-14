@@ -19,7 +19,6 @@ export class CategoryService {
       {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'Authorization': 'Basic ' + btoa('admin:admin')
         }),      
       }).toPromise();
   }
@@ -30,7 +29,6 @@ export class CategoryService {
       responseType: 'blob',
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + btoa('admin:admin')
       }),
     }).toPromise();
   }
@@ -43,7 +41,6 @@ export class CategoryService {
       responseType: 'blob',
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + btoa('admin:admin')
       }),
     }).toPromise();
   }

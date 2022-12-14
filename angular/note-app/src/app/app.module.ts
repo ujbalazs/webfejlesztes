@@ -11,18 +11,23 @@ import { CatAndPrioComponent } from './cat-and-prio/cat-and-prio.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatSelectModule} from '@angular/material'; 
 import { CategoryService } from './services/category.service';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PriorityService } from './services/priority.service';
 import { NoteService } from './services/note.service';
+import { LoginRegisterComponent } from './login-register/login-register.component';
+import { LoginRegisterService } from './services/login-register.service';
+import { AuthService } from './services/auth.service';
+import { TokenInterceptor } from './services/token-interceptor';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotesComponent,
-    CatAndPrioComponent
+    CatAndPrioComponent,
+    LoginRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,17 @@ import { NoteService } from './services/note.service';
     BrowserAnimationsModule,
 
   ],
-  providers: [CategoryService, PriorityService, NoteService],
+  providers: [CategoryService,
+     PriorityService, 
+     NoteService, 
+     LoginRegisterService,
+     AuthService,
+     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+     }],
+     
   bootstrap: [AppComponent]
 })
 export class AppModule { }

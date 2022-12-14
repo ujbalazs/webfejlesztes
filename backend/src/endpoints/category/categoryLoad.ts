@@ -8,11 +8,14 @@ const router = express.Router();
 router.get('/api/categories',  (req, res) => {
 
 	var token = req.headers['x-access-token'];
-    jwt.verify(token, "token", async (err, verified) => {
+   jwt.verify(token, "token", async (err, verified) => {
 		if(err){
 		  return res.send(err.message)
 		}else{
 
+			
+			console.log(verified)
+            
 			const categories = await createQueryBuilder(Category, "categories")
 			.getMany();
 			
@@ -20,7 +23,7 @@ router.get('/api/categories',  (req, res) => {
 			return res.json(categories);
 		}
 	  })
-	
+	  
 	
 });
 

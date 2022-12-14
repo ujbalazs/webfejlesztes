@@ -22,7 +22,6 @@ export class NoteService {
      {
        headers: new HttpHeaders({
          'Content-Type':  'application/json',
-         'Authorization': 'Basic ' + btoa('admin:admin')
        }),      
      }).toPromise();
  }
@@ -37,7 +36,6 @@ export class NoteService {
     responseType: 'blob',
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin')
     }),
   }).toPromise();
 }
@@ -48,7 +46,6 @@ deleteNote(id:string){
     responseType: 'blob',
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin')
     }),
   }).toPromise();
 }
@@ -63,7 +60,6 @@ updateNote(id: string, text:string, cats:Category[], prio:Priority){
     responseType: 'blob',
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin')
     }),
   }).toPromise();
 }

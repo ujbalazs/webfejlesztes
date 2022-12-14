@@ -27,6 +27,7 @@ router.post('/api/user/login', async (req, res) => {
         const token = jwt.sign({user}, 'token');
 
         return res.json({token: token});
+        
 
       } else {
         return res.status(400).send('Login failed')
