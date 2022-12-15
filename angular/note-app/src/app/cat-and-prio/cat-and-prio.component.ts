@@ -37,6 +37,8 @@ export class CatAndPrioComponent implements OnInit {
    catValid: boolean = false;
    prioValid: boolean = false;
    showBar:boolean = false
+   assignedCat:boolean = false;
+   assignedPrio:boolean = false;
 
   
   constructor(private catService: CategoryService, private prioService: PriorityService) { }
@@ -74,7 +76,18 @@ export class CatAndPrioComponent implements OnInit {
   deleteCat(id:string){
     this.catService.deleteCategory(id).then(() =>{
       this.loadCats();
-      this.snackBar();
+      setTimeout(
+        () => {
+          this.snackBar()
+        }, 200);  
+    }).catch((e) => {
+      if(e.statusText == "Assigned category!"){
+        this.assignedCat = true;
+        setTimeout(
+          () => {
+            this.assignedCat = false;
+          }, 2000);
+      }
     })
   }
 
@@ -85,6 +98,14 @@ export class CatAndPrioComponent implements OnInit {
         () => {
           this.snackBar()
         }, 200);  
+    }).catch((e) => {
+      if(e.statusText == "Assigned priority!"){
+        this.assignedPrio = true;
+        setTimeout(
+          () => {
+            this.assignedPrio = false;
+          }, 2000);
+      }
     })
   }
 

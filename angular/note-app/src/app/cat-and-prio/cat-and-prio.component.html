@@ -71,4 +71,12 @@
   Sikeres művelet!
  </mat-card>
 
+ <mat-card [@animation] *ngIf="assignedCat == true" class="assignedbar">
+  Hozzárendelt kategória nem törölhető!
+ </mat-card>
+
+ <mat-card [@animation] *ngIf="assignedPrio == true" class="assignedbar">
+  Hozzárendelt prioritás nem törölhető!
+ </mat-card>
+
 </div>

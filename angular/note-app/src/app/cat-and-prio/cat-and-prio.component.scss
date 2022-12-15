@@ -82,3 +82,18 @@ mat-card{
     
     
 }
+.assignedbar{
+    width: 250px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(139, 0, 0, 0.555);
+    border: 2px solid rgba(196, 0, 0, 0.555);
+    font-size: smaller;
+    font-weight: bold;
+    position: fixed;
+    margin-left: 25px;
+    bottom: 90%;
+    color: rgb(54, 1, 1);
+}
