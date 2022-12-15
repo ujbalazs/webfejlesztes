@@ -6,36 +6,36 @@ const jwt = require('jsonwebtoken')
 
 const router = express.Router();
 
-router.delete('/api/category/delete/:categoryId',async (req, res) => {
-		const { categoryId } = req.params;
+router.delete('/api/category/delete/:categoryId', async (req, res) => {
+	const { categoryId } = req.params;
 
-		
 
-		var token = req.headers['x-access-token'];
-		jwt.verify(token, "token", async (err, verified) => {
-			if(err){
-			  return res.send(err.message)
-			}else{
- 
-				const notes = await createQueryBuilder(Note, "notes").
+
+	var token = req.headers['x-access-token'];
+	jwt.verify(token, "token", async (err, verified) => {
+		if (err) {
+			return res.send(err.message)
+		} else {
+
+			const notes = await createQueryBuilder(Note, "notes").
 				leftJoinAndSelect("notes.categories", "categories").
 				where("notes.user_id = :userid", { userid: verified.user.id }).
-				andWhere("categories.id = :catid", {catid: categoryId}).
+				andWhere("categories.id = :catid", { catid: categoryId }).
 				getMany();
-                
-				if(notes.length == 0){
-					const response = await Category.delete(
-						categoryId
-						
-					);
-		
-					return res.sendStatus(200);
-				}else{
-					res.statusMessage = "Assigned category!"
-					return res.status(400).send();
-				}	
-	}
-})
+
+			if (notes.length == 0) {
+				const response = await Category.delete(
+					categoryId
+
+				);
+
+				return res.sendStatus(200);
+			} else {
+				res.statusMessage = "Assigned category!"
+				return res.status(400).send();
+			}
+		}
+	})
 }
 );
 

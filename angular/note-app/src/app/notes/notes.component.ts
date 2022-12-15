@@ -15,37 +15,37 @@ import { trigger, style, animate, transition } from '@angular/animations';
   animations: [
     trigger(
       'animation', [
-        transition(':enter', [
-          style({ opacity: 0}),
-          animate('400ms', style({ opacity: 1}))
-        ]),
-        transition(':leave', [
-          style({ opacity: 1}),
-          animate('400ms', style({ opacity: 0}))
-        ])
-      ]
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('400ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('400ms', style({ opacity: 0 }))
+      ])
+    ]
     )
   ]
 })
 export class NotesComponent implements OnInit {
 
 
-  categories:Category[]
-  priorities:Priority[]
-  notes:Note[]
-  selectedPrio:Priority
-  selectedPrioId:number
+  categories: Category[]
+  priorities: Priority[]
+  notes: Note[]
+  selectedPrio: Priority
+  selectedPrioId: number
   updateId: string;
-  selectedCats:Category[] = []
-  selectedCatsIds:number[] = []
-  text:string
+  selectedCats: Category[] = []
+  selectedCatsIds: number[] = []
+  text: string
   showEditor: boolean = false;
   editing: boolean = false;
   valid: boolean = false;
-  showBar:boolean = false
+  showBar: boolean = false
 
   toppings = new FormControl('');
-  constructor(private catService: CategoryService, private prioService: PriorityService, private noteService:NoteService) { }
+  constructor(private catService: CategoryService, private prioService: PriorityService, private noteService: NoteService) { }
 
   ngOnInit(): void {
     this.loadCats();
@@ -53,7 +53,7 @@ export class NotesComponent implements OnInit {
     this.loadNotes();
   }
 
-  snackBar(){
+  snackBar() {
     this.showBar = true;
     setTimeout(
       () => {
@@ -61,35 +61,37 @@ export class NotesComponent implements OnInit {
       }, 2000);
   }
 
-  selectCatAndPrio(){
-    if(this.categories.length != 0 || this.categories != null){
-    this.selectedCats = [];
-    for(let i = 0; i < this.categories.length; i++){
-      for(let j = 0; j < this.selectedCatsIds.length; j++){
-        if(this.categories[i].id == this.selectedCatsIds[j] ){
-          this.selectedCats.push(this.categories[i]);
+  selectCatAndPrio() {
+    if (this.categories.length != 0 || this.categories != null) {
+      this.selectedCats = [];
+      for (let i = 0; i < this.categories.length; i++) {
+        for (let j = 0; j < this.selectedCatsIds.length; j++) {
+          if (this.categories[i].id == this.selectedCatsIds[j]) {
+            this.selectedCats.push(this.categories[i]);
+          }
         }
       }
-    }}
-    if(this.priorities.length != 0 || this.priorities != null){
+    }
+    if (this.priorities.length != 0 || this.priorities != null) {
       this.selectedPrio = null;
-    for(let i = 0; i < this.priorities.length; i++){
-        if(this.priorities[i].id == this.selectedPrioId ){
-          this.selectedPrio =this.priorities[i]
-       } 
-    }}
+      for (let i = 0; i < this.priorities.length; i++) {
+        if (this.priorities[i].id == this.selectedPrioId) {
+          this.selectedPrio = this.priorities[i]
+        }
+      }
+    }
   }
 
-  deleteSelection(){
+  deleteSelection() {
     this.valid = false;
     this.selectedCats = [];
     this.selectedCatsIds = [];
     this.selectedPrio = null;
     this.selectedPrioId = null;
-    this.text = null; 
+    this.text = null;
   }
 
-  loadCats(){
+  loadCats() {
     this.catService.loadCategory().then(
       data => {
         this.categories = data;
@@ -98,53 +100,54 @@ export class NotesComponent implements OnInit {
     );
   }
 
-  loadPrios(){
-    this.prioService.loadPriority().then(data =>{
-       this.priorities = data;
+  loadPrios() {
+    this.prioService.loadPriority().then(data => {
+      this.priorities = data;
     });
-   
+
   }
 
-  loadNotes(){
-    this.noteService.loadNote().then(data =>{
+  loadNotes() {
+    this.noteService.loadNote().then(data => {
       this.notes = data;
     })
 
   }
 
-  saveNote(){
+  saveNote() {
     this.selectCatAndPrio();
-    if(this.text == null || this.text == "" || this.selectedCats.length == 0 || this.selectedPrio == null){
+    if (this.text == null || this.text == "" || this.selectedCats.length == 0 || this.selectedPrio == null) {
       this.valid = true;
-    }else{
-    this.noteService.saveNote(this.text, this.selectedCats, this.selectedPrio).then(()=>{
-      this.showEditor = false;
-      this.loadNotes();
-      this.deleteSelection();
-      setTimeout(
-        () => {
-          this.snackBar()
-        }, 200);  
-    })}
+    } else {
+      this.noteService.saveNote(this.text, this.selectedCats, this.selectedPrio).then(() => {
+        this.showEditor = false;
+        this.loadNotes();
+        this.deleteSelection();
+        setTimeout(
+          () => {
+            this.snackBar()
+          }, 200);
+      })
+    }
   }
 
-  deleteNote(id:string){
-     this.noteService.deleteNote(id).then(()=>{
+  deleteNote(id: string) {
+    this.noteService.deleteNote(id).then(() => {
       this.loadNotes();
       setTimeout(
         () => {
           this.snackBar()
-        }, 200);  
+        }, 200);
     })
   }
 
-  setItemToUpdate(id: string, text: string, cats:Category[], prio:number){
+  setItemToUpdate(id: string, text: string, cats: Category[], prio: number) {
     this.updateId = id;
     this.editing = true;
     this.showEditor = true;
     this.deleteSelection()
     this.text = text;
-    for(let i =0; i< cats.length; i++){
+    for (let i = 0; i < cats.length; i++) {
       this.selectedCatsIds.push(cats[i].id)
     }
     this.selectedPrioId = prio;
@@ -152,32 +155,33 @@ export class NotesComponent implements OnInit {
 
   }
 
-  updateNote(id){
+  updateNote(id) {
     this.selectCatAndPrio();
-    if(this.text == null || this.text == "" || this.selectedCats.length == 0 || this.selectedPrio == null){
+    if (this.text == null || this.text == "" || this.selectedCats.length == 0 || this.selectedPrio == null) {
       this.valid = true;
-    }else{
-    this.noteService.updateNote(id, this.text, this.selectedCats, this. selectedPrio).then(()=>{
-      this.showEditor = false;
-      this.loadNotes();
-      this.deleteSelection();
-      setTimeout(
-        () => {
-          this.snackBar()
-        }, 200);    
-    })}
+    } else {
+      this.noteService.updateNote(id, this.text, this.selectedCats, this.selectedPrio).then(() => {
+        this.showEditor = false;
+        this.loadNotes();
+        this.deleteSelection();
+        setTimeout(
+          () => {
+            this.snackBar()
+          }, 200);
+      })
+    }
   }
 
-  newNote(){
+  newNote() {
     this.deleteSelection()
     this.editing = false;
-    if(this.showEditor == false){
+    if (this.showEditor == false) {
       this.showEditor = true
-    }else{this.showEditor = false}
+    } else { this.showEditor = false }
   }
 
-  cancelEdit(){
-   this.deleteSelection()
+  cancelEdit() {
+    this.deleteSelection()
     this.showEditor = false
   }
 

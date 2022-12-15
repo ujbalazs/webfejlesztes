@@ -1,7 +1,6 @@
 import express from 'express';
 import { createQueryBuilder } from 'typeorm';
-import {  User } from '../../models';
-
+import { User } from '../../models';
 
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -9,32 +8,33 @@ const jwt = require('jsonwebtoken')
 
 
 router.post('/api/user/login', async (req, res) => {
-	const {
-		name,
-        password
-	} = req.body;
+  const {
+    name,
+    password
+  } = req.body;
 
-  if(name == "" || name == null || password == "" || password== null){
+  if (name == "" || name == null || password == "" || password == null) {
     return res.sendStatus(400)
-  }else{
+  } else {
     const user = await createQueryBuilder(User, "user")
-    .where("user.name = :name", { name: name })
-    .getOne();
+      .where("user.name = :name", { name: name })
+      .getOne();
 
-    if(user == null){
-        return res.status(400).send('Login failed')
+    if (user == null) {
+      return res.status(400).send('Login failed')
     }
 
-    if(await bcrypt.compare(password, user!.password)) {
-        
-        const token = jwt.sign({user}, 'token');
+    if (await bcrypt.compare(password, user!.password)) {
 
-        return res.json({token: token});
-        
+      const token = jwt.sign({ user }, 'token');
 
-      } else {
-        return res.status(400).send('Login failed')
-      }
-}});
+      return res.json({ token: token });
+
+
+    } else {
+      return res.status(400).send('Login failed')
+    }
+  }
+});
 
 export { router as loginUserRouter };

@@ -13,63 +13,64 @@ export class LoginRegisterComponent implements OnInit {
 
 
   name: string;
-  password:string;
-  loginError:boolean;
-  registerError:boolean;
-  valid:boolean;
-  registered:boolean;
-  
+  password: string;
+  loginError: boolean;
+  registerError: boolean;
+  valid: boolean;
+  registered: boolean;
 
-  constructor(private logRegService:LoginRegisterService, private authService: AuthService, private router: Router) { }
+
+  constructor(private logRegService: LoginRegisterService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  resetInput(){
-    this.name=null;
-    this.password=null;
+  resetInput() {
+    this.name = null;
+    this.password = null;
     this.loginError = false;
     this.registerError = false;
   }
 
-  login(){
-    if(this.name == "" || this.name == null || this.password == "" || this.password == null){
+  login() {
+    if (this.name == "" || this.name == null || this.password == "" || this.password == null) {
       this.valid = false;
-     }else{
+    } else {
       this.valid = true;
       this.logRegService.login(this.name, this.password).then(
-        (data)=>{
-          let res:any = data.body;
+        (data) => {
+          let res: any = data.body;
           this.authService.saveToken(res.token);
           this.resetInput();
-          this.registered =false;
+          this.registered = false;
           this.router.navigateByUrl('');
         }
-      ).catch(e =>{
+      ).catch(e => {
         this.registerError = false;
         this.loginError = true;
-        this.registered =false;
+        this.registered = false;
         console.log(e)
       })
     }
   }
 
-  register(){
-    if(this.name == "" || this.name == null || this.password == "" || this.password == null){
+  register() {
+    if (this.name == "" || this.name == null || this.password == "" || this.password == null) {
       this.valid = false;
-     }else{
-    this.logRegService.register(this.name, this.password).then(
-      ()=>{
-        this.registered =true;
-        this.resetInput();
-      }
-    ).catch(e =>{
-      this.registered =false;
-      this.loginError = false;
-      this.registerError = true;
-      console.log(e)
-    })
+    } else {
+      this.logRegService.register(this.name, this.password).then(
+        () => {
+          this.registered = true;
+          this.resetInput();
+        }
+      ).catch(e => {
+        this.registered = false;
+        this.loginError = false;
+        this.registerError = true;
+        console.log(e)
+      })
 
-  }}
+    }
+  }
 
 }

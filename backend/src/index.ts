@@ -27,16 +27,16 @@ const connection = async () => {
 			username: 'postgres',
 			password: 'qwert',
 			database: 'note',
-			entities:[Note, Category, Priority, User],
+			entities: [Note, Category, Priority, User],
 			synchronize: true,
-			
+
 		});
 		console.log('Connected to Database');
 
 		app.use(cors());
 
 		app.use(express.json());
-		
+
 		app.use(createCategoryRouter);
 		app.use(loadCategoryRouter);
 		app.use(deleteCategoryRouter);

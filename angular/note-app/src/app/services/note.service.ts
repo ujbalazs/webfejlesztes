@@ -17,51 +17,53 @@ export class NoteService {
 
   constructor(private httpClien: HttpClient) { }
 
-  loadNote(){
-    return this.httpClien.get<Note[]>(loadUrl, 
-     {
-       headers: new HttpHeaders({
-         'Content-Type':  'application/json',
-       }),      
-     }).toPromise();
- }
+  loadNote() {
+    return this.httpClien.get<Note[]>(loadUrl,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }).toPromise();
+  }
 
- saveNote(text:string, cats:Category[], prio:Priority){
-  return this.httpClien.post(saveUrl, {
-    text: text,
-    priority: prio,
-    categories:cats},
-    {
-    observe: 'response',
-    responseType: 'blob',
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    }),
-  }).toPromise();
-}
+  saveNote(text: string, cats: Category[], prio: Priority) {
+    return this.httpClien.post(saveUrl, {
+      text: text,
+      priority: prio,
+      categories: cats
+    },
+      {
+        observe: 'response',
+        responseType: 'blob',
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }).toPromise();
+  }
 
-deleteNote(id:string){
-  return this.httpClien.delete(deleteUrl + id, {
-    observe: 'response',
-    responseType: 'blob',
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    }),
-  }).toPromise();
-}
+  deleteNote(id: string) {
+    return this.httpClien.delete(deleteUrl + id, {
+      observe: 'response',
+      responseType: 'blob',
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    }).toPromise();
+  }
 
-updateNote(id: string, text:string, cats:Category[], prio:Priority){
-  return this.httpClien.post(updateUrl + id, {
-    text: text,
-    priority: prio,
-    categories:cats},
-    {
-    observe: 'response',
-    responseType: 'blob',
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    }),
-  }).toPromise();
-}
+  updateNote(id: string, text: string, cats: Category[], prio: Priority) {
+    return this.httpClien.post(updateUrl + id, {
+      text: text,
+      priority: prio,
+      categories: cats
+    },
+      {
+        observe: 'response',
+        responseType: 'blob',
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }).toPromise();
+  }
 
 }

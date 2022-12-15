@@ -6,27 +6,27 @@ import {
 	OneToMany,
 	ManyToMany,
 	JoinTable,
-    ManyToOne,
-    PrimaryGeneratedColumn,
-    BaseEntity,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+	BaseEntity,
 } from 'typeorm';
 
 @Entity('priority')
 export class Priority extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number
+	@PrimaryGeneratedColumn()
+	id: number
 
 	@Column()
 	name: string;
 
-    @OneToMany(() => Note, (note) => note.priority)
-    notes: Note[]
+	@OneToMany(() => Note, (note) => note.priority)
+	notes: Note[]
 
 	@Column()
 	user_id: string;
 
-    @CreateDateColumn()
+	@CreateDateColumn()
 	created_at: Date;
 
 	@UpdateDateColumn()
@@ -36,28 +36,28 @@ export class Priority extends BaseEntity {
 @Entity('note')
 export class Note extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number
+	@PrimaryGeneratedColumn()
+	id: number
 
 	@Column()
 	text: string;
 
-	@ManyToOne(() => Priority, (priority) => priority.notes , {
+	@ManyToOne(() => Priority, (priority) => priority.notes, {
 		cascade: true,
 		onDelete: 'CASCADE',
-		onUpdate:'CASCADE'
-	  })
-    priority: Priority
+		onUpdate: 'CASCADE'
+	})
+	priority: Priority
 
 
-    @ManyToMany(() => Category, {cascade: true})
-    @JoinTable()
-    categories: Category[]
+	@ManyToMany(() => Category, { cascade: true })
+	@JoinTable()
+	categories: Category[]
 
 	@Column()
 	user_id: string;
 
-    @CreateDateColumn()
+	@CreateDateColumn()
 	created_at: Date;
 
 	@UpdateDateColumn()
@@ -67,8 +67,8 @@ export class Note extends BaseEntity {
 @Entity('category')
 export class Category extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number
+	@PrimaryGeneratedColumn()
+	id: number
 
 	@Column()
 	name: string;
@@ -76,7 +76,7 @@ export class Category extends BaseEntity {
 	@Column()
 	user_id: string;
 
-    @CreateDateColumn()
+	@CreateDateColumn()
 	created_at: Date;
 
 	@UpdateDateColumn()
@@ -86,8 +86,8 @@ export class Category extends BaseEntity {
 @Entity('user')
 export class User extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number
+	@PrimaryGeneratedColumn()
+	id: number
 
 	@Column()
 	name: string;
@@ -95,7 +95,7 @@ export class User extends BaseEntity {
 	@Column()
 	password: string;
 
-    @CreateDateColumn()
+	@CreateDateColumn()
 	created_at: Date;
 
 	@UpdateDateColumn()

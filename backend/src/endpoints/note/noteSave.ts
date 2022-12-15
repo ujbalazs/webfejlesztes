@@ -9,35 +9,36 @@ const jwt = require('jsonwebtoken')
 
 
 router.post('/api/note/save', async (req, res) => {
-	const {
-		    text,
-        priority,
-        categories
-	} = req.body;
+  const {
+    text,
+    priority,
+    categories
+  } = req.body;
 
-   var token = req.headers['x-access-token'];
-		jwt.verify(token, "token", async (err, verified) => {
-			if(err){
-			  return res.send(err.message)
-			}else{
-    
-   if( text == null || text == "" || priority == null || categories == null || categories.length == 0){
-    return res.sendStatus(400);
-   }else{
+  var token = req.headers['x-access-token'];
+  jwt.verify(token, "token", async (err, verified) => {
+    if (err) {
+      return res.send(err.message)
+    } else {
 
-	const note = Note.create({
-        text: text,
-        user_id: verified.user.id,
-        priority: priority,
-        categories:categories
-    });
+      if (text == null || text == "" || priority == null || categories == null || categories.length == 0) {
+        return res.sendStatus(400);
+      } else {
 
-    await note.save()
+        const note = Note.create({
+          text: text,
+          user_id: verified.user.id,
+          priority: priority,
+          categories: categories
+        });
 
-    return res.sendStatus(200);
+        await note.save()
 
-	}}
-})
+        return res.sendStatus(200);
+
+      }
+    }
+  })
 }
 );
 

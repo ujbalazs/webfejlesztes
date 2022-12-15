@@ -8,12 +8,12 @@ export class AuthService {
   constructor() { }
 
 
-  saveToken(token:string){
+  saveToken(token: string) {
     localStorage.removeItem("token")
     localStorage.setItem("token", token);
   }
 
-  checkLoggedIn(){
+  checkLoggedIn() {
     const token = localStorage.getItem("token")
     if (token) {
       return true;

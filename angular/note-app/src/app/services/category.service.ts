@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Category } from './Category';
 
 const loadUrl = "http://localhost:8080/api/categories";
@@ -14,33 +14,33 @@ export class CategoryService {
 
   constructor(private httpClien: HttpClient) { }
 
-  loadCategory(){
-     return this.httpClien.get<Category[]>(loadUrl, 
+  loadCategory() {
+    return this.httpClien.get<Category[]>(loadUrl,
       {
         headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-        }),      
+          'Content-Type': 'application/json',
+        }),
       }).toPromise();
   }
 
-  deleteCategory(id:string){
+  deleteCategory(id: string) {
     return this.httpClien.delete(deleteUrl + id, {
       observe: 'response',
       responseType: 'blob',
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       }),
     }).toPromise();
   }
 
-  saveCategory(name:string){
+  saveCategory(name: string) {
     return this.httpClien.post(saveUrl, {
       "name": name
-    } ,{
+    }, {
       observe: 'response',
       responseType: 'blob',
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       }),
     }).toPromise();
   }

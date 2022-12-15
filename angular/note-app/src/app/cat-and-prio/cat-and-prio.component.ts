@@ -13,43 +13,43 @@ import { PriorityService } from '../services/priority.service';
   animations: [
     trigger(
       'animation', [
-        transition(':enter', [
-          style({ opacity: 0}),
-          animate('400ms', style({ opacity: 1}))
-        ]),
-        transition(':leave', [
-          style({ opacity: 1}),
-          animate('400ms', style({ opacity: 0}))
-        ])
-      ]
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('400ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('400ms', style({ opacity: 0 }))
+      ])
+    ]
     )
   ]
 })
 
 export class CatAndPrioComponent implements OnInit {
 
-   catEditorShow:boolean = false;
-   prioEditorShow:boolean = false;
-   categories:Category[]
-   priorities:Priority[]
-   catName: string;
-   prioName: string;
-   catValid: boolean = false;
-   prioValid: boolean = false;
-   showBar:boolean = false
-   assignedCat:boolean = false;
-   assignedPrio:boolean = false;
+  catEditorShow: boolean = false;
+  prioEditorShow: boolean = false;
+  categories: Category[]
+  priorities: Priority[]
+  catName: string;
+  prioName: string;
+  catValid: boolean = false;
+  prioValid: boolean = false;
+  showBar: boolean = false
+  assignedCat: boolean = false;
+  assignedPrio: boolean = false;
 
-  
+
   constructor(private catService: CategoryService, private prioService: PriorityService) { }
 
-  
+
   ngOnInit(): void {
     this.loadCats();
     this.loadPrios();
   }
 
-  snackBar(){
+  snackBar() {
     this.showBar = true;
     setTimeout(
       () => {
@@ -57,7 +57,7 @@ export class CatAndPrioComponent implements OnInit {
       }, 2000);
   }
 
-  loadCats(){
+  loadCats() {
     this.catService.loadCategory().then(
       data => {
         this.categories = data;
@@ -66,22 +66,22 @@ export class CatAndPrioComponent implements OnInit {
     );
   }
 
-  loadPrios(){
-    this.prioService.loadPriority().then(data =>{
-       this.priorities = data;
+  loadPrios() {
+    this.prioService.loadPriority().then(data => {
+      this.priorities = data;
     });
-   
+
   }
 
-  deleteCat(id:string){
-    this.catService.deleteCategory(id).then(() =>{
+  deleteCat(id: string) {
+    this.catService.deleteCategory(id).then(() => {
       this.loadCats();
       setTimeout(
         () => {
           this.snackBar()
-        }, 200);  
+        }, 200);
     }).catch((e) => {
-      if(e.statusText == "Assigned category!"){
+      if (e.statusText == "Assigned category!") {
         this.assignedCat = true;
         setTimeout(
           () => {
@@ -91,15 +91,15 @@ export class CatAndPrioComponent implements OnInit {
     })
   }
 
-  deletePrio(id:string){
-    this.prioService.deletePriority(id).then(() =>{
+  deletePrio(id: string) {
+    this.prioService.deletePriority(id).then(() => {
       this.loadPrios();
       setTimeout(
         () => {
           this.snackBar()
-        }, 200);  
+        }, 200);
     }).catch((e) => {
-      if(e.statusText == "Assigned priority!"){
+      if (e.statusText == "Assigned priority!") {
         this.assignedPrio = true;
         setTimeout(
           () => {
@@ -109,48 +109,50 @@ export class CatAndPrioComponent implements OnInit {
     })
   }
 
-  saveCat(){
-    if(this.catName == '' || this.catName == null ){
+  saveCat() {
+    if (this.catName == '' || this.catName == null) {
       this.catValid = true
-    }else{
+    } else {
       this.catValid = false
-      this.catService.saveCategory(this.catName).then(() =>{
-      this.loadCats();
-      this.catName = '';
-      this.catEditorShow = false;
-      setTimeout(
-        () => {
-          this.snackBar()
-        }, 200);  
-    })}
+      this.catService.saveCategory(this.catName).then(() => {
+        this.loadCats();
+        this.catName = '';
+        this.catEditorShow = false;
+        setTimeout(
+          () => {
+            this.snackBar()
+          }, 200);
+      })
+    }
   }
 
-  savePrio(){
-    if(this.prioName == '' || this.prioName == null ){
+  savePrio() {
+    if (this.prioName == '' || this.prioName == null) {
       this.prioValid = true
-    }else{
+    } else {
       this.prioValid = false
-      this.prioService.savePriority(this.prioName).then(() =>{
-      this.loadPrios();
-      this.prioName = '';
-      this.prioEditorShow = false;
-      setTimeout(
-        () => {
-          this.snackBar()
-        }, 200);  
-    })}
-  }
-  
-  newCat(){
-    if(this.catEditorShow == false){
-      this.catEditorShow = true
-    }else{this.catEditorShow = false}
+      this.prioService.savePriority(this.prioName).then(() => {
+        this.loadPrios();
+        this.prioName = '';
+        this.prioEditorShow = false;
+        setTimeout(
+          () => {
+            this.snackBar()
+          }, 200);
+      })
+    }
   }
 
-  newPrio(){
-    if(this.prioEditorShow == false){
+  newCat() {
+    if (this.catEditorShow == false) {
+      this.catEditorShow = true
+    } else { this.catEditorShow = false }
+  }
+
+  newPrio() {
+    if (this.prioEditorShow == false) {
       this.prioEditorShow = true
-    }else{this.prioEditorShow = false}
+    } else { this.prioEditorShow = false }
   }
 
 }
